@@ -34,6 +34,8 @@ This is a composite dictionary which contains
 For more information about the Simsapa Dhamma Reader, please visit [https://simsapa.github.io/](https://simsapa.github.io/) 
 
 ## Pali English Ultimate (PEU)
-Pali Myanmar Abhidhan is the world's largest Pali dictionary, a massive 23 volumes, with more than 200 000 words, a complete reference guide to the language of the root texts and commentaries.
+The Pali Myanmar Abhidhan is the world's largest Pali dictionary.  It a massive 23 volumes, with more than 200,000 words.  It is a complete reference guide to the language of the root texts and commentaries.  The original "Abhidhan" is still "work in progress", with more volumes expected for release.
     
-PEU is a project in progress to translate the Abhidhan's definitions into English, currently at about 80% human translated, the remainder is by Google. You can find the [Project Website](https://pm12e.pali.tools/) here. PEU dictionary is integrated into [Tipitaka Pali Reader](https://github.com/bksubhuti/tipitaka-pali-reader).
+The PEU is a highly abridged English translation of this work.  It is a "work in progress" translation of the Myanmar dictionary volumes.  The original project used Google translate to jumpstart the project, in which approximately 70% can give you an idea of the meaning of some very complex commentarial and subcommentary words.  Currently, the human review and corrections of the Google translations are at about 80%.  
+
+Each entry has "CL" or "Google Translate."  CL means "Confidence Level" of the translator.  "Google Translate" means the entry has not yet been human reviewed. You can find the PEU [translation status](https://pm12e.pali.tools/) here. You can report [translation issues](https://github.com/dhammacakka/pm12e/issues)  PEU dictionary is integrated into [Tipitaka Pali Reader](https://americanmonk.org/tipitaka-pali-reader/).  The Tipitaka Pali Reader Project is found [here](https://github.com/bksubhuti/tipitaka-pali-reader).
