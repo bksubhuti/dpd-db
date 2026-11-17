@@ -346,8 +346,8 @@ def update_download_list(zip_path: Path) -> None:
     """Point the TPR download list at today's package.
 
     Only download_list_2.json: download_list.json is read by TPR versions too
-    old to install a package. The entry is found by its file name and moved
-    under the heading for the builds that can install it.
+    old to install a package. The entry is found by its URL and listed
+    under Dictionaries.
     """
     pr.green_tmr("updating the tpr download list")
     list_path = ProjectPaths().tpr_download_list_2_path
@@ -358,7 +358,7 @@ def update_download_list(zip_path: Path) -> None:
         "name": f"DPD {TODAY.strftime('%B')} {TODAY.year} All-in-One with Extras",
         "release_date": f"{TODAY.day}.{TODAY.month}.{TODAY.year}",
         "type": "package",
-        "category": "For build 129 and above",
+        "category": "Dictionaries",
         "url": RELEASE_URL,
         "filename": zip_path.name,
         "size": f"{zip_path.stat().st_size / 1000 / 1000:.1f} MB",
