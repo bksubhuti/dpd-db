@@ -23,6 +23,7 @@ from db.db_helpers import get_db_session
 from db.models import DpdHeadword, FamilyCompound, FamilyRoot, Lookup
 from exporter.goldendict.helpers import TODAY
 from exporter.tpr import tpr_exporter as tpr
+from exporter.tpr import tpr_lang
 from tools.headwords_clean_set import make_clean_headwords_set
 from tools.pali_sort_key import pali_list_sorter, pali_sort_key
 from tools.paths import ProjectPaths
@@ -266,7 +267,7 @@ def commands() -> list[tuple[str, str, str | None, str | None]]:
     return steps
 
 
-def write_package(g: GlobalVars, out: Path, version: int) -> None:
+def write_package(g: GlobalVars, out: Path, version: int, lang: str | None = None) -> None:
     pr.green_tmr("writing package")
     out.unlink(missing_ok=True)
     conn = sqlite3.connect(out)
@@ -276,12 +277,14 @@ def write_package(g: GlobalVars, out: Path, version: int) -> None:
     c.executemany(
         "INSERT INTO meta VALUES (?, ?)",
         [
-            ("id", PACKAGE_ID),
+            ("id", f"{PACKAGE_ID}_{lang}" if lang else PACKAGE_ID),
             ("version", str(version)),
-            ("title", "Digital Pāḷi Dictionary"),
+            ("title", tpr_lang.TITLES[lang] if lang else "Digital Pāḷi Dictionary"),
             (
                 "description",
-                f"DPD {version} with inflections, root and compound families "
+                tpr_lang.DESCRIPTIONS[lang].format(v=version)
+                if lang
+                else f"DPD {version} with inflections, root and compound families "
                 "and frequency",
             ),
             ("format", str(PACKAGE_FORMAT)),
@@ -379,7 +382,20 @@ def main() -> None:
     parser.add_argument(
         "--out", type=Path, default=Path("exporter/tpr/output/dpd.pkg.db")
     )
+    parser.add_argument(
+        "--lang",
+        choices=["si", "th"],
+        help="build the Sinhala or Thai package from AI-translated definitions",
+    )
+    parser.add_argument(
+        "--translations",
+        type=Path,
+        default=Path.home() / "git/dictionary/translations.db",
+        help="translations.db made by ~/git/dictionary/scripts/merge.py",
+    )
     args = parser.parse_args()
+    if args.lang and args.out == Path("exporter/tpr/output/dpd.pkg.db"):
+        args.out = Path(f"exporter/tpr/output/dpd_{args.lang}.pkg.db")
 
     pr.tic()
     pr.yellow_title("building the tpr package")
@@ -401,15 +417,17 @@ def main() -> None:
 
     g = GlobalVars(args.db)
     tpr.generate_tpr_data(g)  # type: ignore[arg-type]
+    if args.lang:
+        tpr_lang.generate_tpr_data_lang(g, args.lang, args.translations)
     tpr.generate_deconstructor_data(g)  # type: ignore[arg-type]
     tpr.add_spelling_mistakes(g)  # type: ignore[arg-type]
     make_i2h(g)
     make_grammar(g)
     make_extras(g)
-    write_package(g, args.out, version)
+    write_package(g, args.out, version, args.lang)
     zip_path = zip_package(args.out)
     report(args.out)
-    if args.version is None:
+    if args.version is None and not args.lang:
         update_download_list(zip_path)
     pr.toc()
 
