@@ -358,7 +358,7 @@ def update_download_list(zip_path: Path) -> None:
         pr.no("no tpr_downloads")
         return
     entry = {
-        "name": f"DPD {TODAY.strftime('%B')} {TODAY.year} All-in-One with Extras",
+        "name": f"DPD English {TODAY.strftime('%B')} {TODAY.year} All-in-One with Extras",
         "release_date": f"{TODAY.day}.{TODAY.month}.{TODAY.year}",
         "type": "package",
         "category": "Dictionaries",
