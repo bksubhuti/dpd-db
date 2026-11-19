@@ -1,4 +1,4 @@
-"""Sinhala / Thai versions of the TPR DPD package.
+"""Sinhala / Thai / Hindi / Myanmar versions of the TPR DPD package.
 
 The English definitions are swapped for the AI translations made in
 ~/git/dictionary (translations.db: headwords.id -> definitions.key ->
@@ -22,10 +22,12 @@ from aksharamukha import transliterate
 
 from tools.sinhala_tools import pos_dict
 
-LANGS = {"si": "Sinhala", "th": "Thai"}
+LANGS = {"si": "Sinhala", "th": "Thai", "hi": "Hindi", "my": "Myanmar"}
 TITLES = {
     "si": "Digital Pāḷi Dictionary (සිංහල)",
     "th": "Digital Pāḷi Dictionary (ภาษาไทย)",
+    "hi": "Digital Pāḷi Dictionary (हिन्दी)",
+    "my": "Digital Pāḷi Dictionary (မြန်မာ)",
 }
 DESCRIPTIONS = {
     "si": "DPD {v}, definitions translated into Sinhala by AI (beta). "
@@ -33,6 +35,12 @@ DESCRIPTIONS = {
     "by Bodhirasa Bhikkhu, CC BY-NC-SA 4.0.",
     "th": "DPD {v}, definitions translated into Thai by AI (beta). "
     "Pāḷi in Thai script. Translated from the Digital Pāḷi Dictionary "
+    "by Bodhirasa Bhikkhu, CC BY-NC-SA 4.0.",
+    "hi": "DPD {v}, definitions translated into Hindi by AI (beta). "
+    "Pāḷi in Devanagari script. Translated from the Digital Pāḷi Dictionary "
+    "by Bodhirasa Bhikkhu, CC BY-NC-SA 4.0.",
+    "my": "DPD {v}, definitions translated into Myanmar (Burmese) by AI (beta). "
+    "Pāḷi in Myanmar script. Translated from the Digital Pāḷi Dictionary "
     "by Bodhirasa Bhikkhu, CC BY-NC-SA 4.0.",
 }
 
@@ -46,6 +54,26 @@ POS_TH = {
     "ger": "ภาวะ", "card": "สังขยา", "ordin": "ปูรณสังขยา", "imp": "ปัญจมี",
     "opt": "สัตตมี", "ve": "วาจก", "root": "ธาตุ", "suffix": "ปัจจัย",
     "perf": "ปโรกขา", "fut": "ภวิสสันติ",
+}
+POS_HI = {
+    "letter": "अक्षर", "prefix": "उपसर्ग", "cs": "विकरण", "abbrev": "संक्षेप",
+    "adj": "विशेषण", "pron": "सर्वनाम", "ptp": "कृत्य प्रत्यय", "pp": "भूतकालिक कृदन्त",
+    "masc": "पुल्लिङ्ग", "aor": "अज्जतनी", "nt": "नपुंसकलिङ्ग", "fem": "स्त्रीलिङ्ग",
+    "ind": "अव्यय", "prp": "वर्तमान कृदन्त", "abs": "पूर्वकालिक क्रिया",
+    "cond": "कालातिपत्ति", "imperf": "हीयत्तनी", "sandhi": "सन्धि", "idiom": "मुहावरा",
+    "pr": "वत्तमाना", "inf": "तुमन्त", "ger": "भाव", "card": "संख्यावाचक",
+    "ordin": "क्रमवाचक", "imp": "पञ्चमी", "opt": "सत्तमी", "ve": "वाच्य",
+    "root": "धातु", "suffix": "प्रत्यय", "perf": "परोक्खा", "fut": "भविस्सन्ति",
+}
+POS_MY = {
+    "letter": "အက္ခရာ", "prefix": "ဥပသဂ္ဂ", "cs": "ဝိကရဏ", "abbrev": "အတိုကောက်",
+    "adj": "ဂုဏ်နာမ်", "pron": "သဗ္ဗနာမ်", "ptp": "ကိစ္စပစ္စည်း", "pp": "အတီတကိတ်",
+    "masc": "ပုလ္လိင်", "aor": "အဇ္ဇတနီ", "nt": "နပုံသကလိင်", "fem": "ဣတ္ထိလိင်",
+    "ind": "နိပါတ်", "prp": "ပစ္စုပ္ပန်ကိတ်", "abs": "ပုဗ္ဗကာလကိရိယာ",
+    "cond": "ကာလာတိပတ္တိ", "imperf": "ဟိယျတ္တနီ", "sandhi": "သန္ဓိ", "idiom": "စကားပုံ",
+    "pr": "ဝတ္တမာနာ", "inf": "တုမန္တ", "ger": "ဘာဝ", "card": "သင်္ချာ",
+    "ordin": "ပူရဏသင်္ချာ", "imp": "ပဉ္စမီ", "opt": "သတ္တမီ", "ve": "ဝါစက",
+    "root": "ဓာတ်", "suffix": "ပစ္စည်း", "perf": "ပရောက္ခာ", "fut": "ဘဝိဿန္တိ",
 }
 POS_SI = {k: v["pos_si_full"].split(",")[0].split(".")[0].strip()
           for k, v in pos_dict.items()}
@@ -70,6 +98,24 @@ GRAM = {
            "adv": "กิริยาวิเสสนะ", "excl": "นิบาต", "interr": "ปุจฉา",
            "emph": "เน้นความ", "kammadhāraya": "กัมมธารยะ", "dvanda": "ทวันทะ",
            "bahubbīhi": "พหุพพีหิ", "tappurisa": "ตัปปุริสะ", "digu": "ทิคุ"},
+    "hi": {"comp": "समास", "abstr": "भाववाचक", "caus": "प्रेरणार्थक", "pass": "कर्मवाच्य",
+           "act": "कर्तृवाच्य", "reflx": "अत्तनोपद", "desid": "इच्छार्थक",
+           "intens": "अतिशयार्थक", "denom": "नामधातु", "redup": "द्वित्व",
+           "irreg": "अनियमित", "neg": "निषेध", "trans": "सकर्मक",
+           "intrans": "अकर्मक", "ditrans": "द्विकर्मक", "impers": "भाववाच्य",
+           "pl": "बहुवचन", "sg": "एकवचन", "dual": "द्विवचन", "der": "तद्धित",
+           "adv": "क्रियाविशेषण", "excl": "विस्मयादिबोधक", "interr": "प्रश्नवाचक",
+           "emph": "बलसूचक", "kammadhāraya": "कम्मधारय", "dvanda": "द्वन्द",
+           "bahubbīhi": "बहुब्बीहि", "tappurisa": "तप्पुरिस", "digu": "दिगु"},
+    "my": {"comp": "သမာသ်", "abstr": "ဘာဝနာမ်", "caus": "ဟေတုကတ္တား", "pass": "ကမ္မဝါစက",
+           "act": "ကတ္တုဝါစက", "reflx": "အတ္တနောပုဒ်", "desid": "ဣစ္ဆတ္ထ",
+           "intens": "အတိသယတ္ထ", "denom": "နာမဓာတ်", "redup": "ဒွေဘာဝ",
+           "irreg": "ပုံမမှန်", "neg": "ပဋိသေဓ", "trans": "သကမ္မက",
+           "intrans": "အကမ္မက", "ditrans": "ဒွိကမ္မက", "impers": "ဘာဝဝါစက",
+           "pl": "ဗဟုဝုစ်", "sg": "ဧကဝုစ်", "dual": "ဒွိဝုစ်", "der": "တဒ္ဓိတ်",
+           "adv": "ကြိယာဝိသေသန", "excl": "အာမေဍိတ်", "interr": "ပုစ္ဆာ",
+           "emph": "အလေးပေး", "kammadhāraya": "ကမ္မဓာရယ", "dvanda": "ဒွန္ဒ",
+           "bahubbīhi": "ဗဟုဗ္ဗီဟိ", "tappurisa": "တပ္ပုရိသ", "digu": "ဒိဂု"},
 }
 
 LABELS = {
@@ -89,12 +135,31 @@ LABELS = {
            "Cognate": "คำร่วมเชื้อสาย", "Link": "ลิงก์", "Non IA": "ไม่ใช่อินโด-อารยัน",
            "Sanskrit": "สันสกฤต", "Sanskrit Root": "ธาตุสันสกฤต",
            "Submit a correction": "แจ้งแก้ไข"},
+    "hi": {"Pāḷi": "पालि", "Grammar": "व्याकरण", "Root": "धातु",
+           "√ In Sandhi": "√ सन्धि में", "Base": "आधार", "Construction": "पद-रचना",
+           "Derivative": "व्युत्पन्न", "Phonetic": "ध्वनि परिवर्तन",
+           "Compound": "समास", "Antonym": "विलोम", "Synonym": "पर्याय",
+           "Variant": "पाठभेद", "Commentary": "अट्ठकथा", "Notes": "टिप्पणी",
+           "Cognate": "सजातीय शब्द", "Link": "लिंक", "Non IA": "गैर-भारतीय-आर्य",
+           "Sanskrit": "संस्कृत", "Sanskrit Root": "संस्कृत धातु",
+           "Submit a correction": "सुधार भेजें"},
+    "my": {"Pāḷi": "ပါဠိ", "Grammar": "သဒ္ဒါ", "Root": "ဓာတ်",
+           "√ In Sandhi": "√ သန္ဓိတွင်", "Base": "အခြေ", "Construction": "ပုဒ်ပြီးပုံ",
+           "Derivative": "ဆင့်ပွားပုဒ်", "Phonetic": "အသံပြောင်းခြင်း",
+           "Compound": "သမာသ်", "Antonym": "ဆန့်ကျင်ဘက်စကား", "Synonym": "အနက်တူစကား",
+           "Variant": "ပါဌ်ကွဲ", "Commentary": "အဋ္ဌကထာ", "Notes": "မှတ်ချက်",
+           "Cognate": "ဆွေမျိုးစကား", "Link": "လင့်ခ်", "Non IA": "အင်ဒို-အာရိယန် မဟုတ်",
+           "Sanskrit": "သက္ကတ", "Sanskrit Root": "သက္ကတ ဓာတ်",
+           "Submit a correction": "ပြင်ဆင်ချက် ပေးပို့ရန်"},
 }
+
+SCRIPTS = {"th": "Thai", "hi": "Devanagari", "my": "Burmese"}
+POS = {"hi": POS_HI, "my": POS_MY, "th": POS_TH}
 
 
 @lru_cache(maxsize=None)
 def to_script(text: str, lang: str) -> str:
-    """Roman Pāḷi -> Sinhala / Thai script. Digits, punctuation and + > √
+    """Roman Pāḷi -> Sinhala / Thai / Devanagari / Myanmar script. Digits, punctuation and + > √
     pass through."""
     if not text:
         return text
@@ -103,7 +168,7 @@ def to_script(text: str, lang: str) -> str:
             "IASTPali", "Sinhala", text, post_options=["SinhalaPali", "SinhalaConjuncts"]
         )
     else:
-        out = transliterate.process("IASTPali", "Thai", text)
+        out = transliterate.process("IASTPali", SCRIPTS[lang], text)
     return cast(str, out)
 
 
@@ -185,12 +250,12 @@ class LangHeadword:
 
     @property
     def pos(self):
-        table = POS_SI if self._lang == "si" else POS_TH
+        table = POS_SI if self._lang == "si" else POS[self._lang]
         return table.get(self._i.pos, self._i.pos)
 
     @property
     def grammar(self):
-        table = {**(POS_SI if self._lang == "si" else POS_TH), **GRAM[self._lang]}
+        table = {**(POS_SI if self._lang == "si" else POS[self._lang]), **GRAM[self._lang]}
         return ", ".join(table.get(w.strip(), w.strip()) for w in self._i.grammar.split(","))
 
     @property
@@ -211,7 +276,7 @@ def localise_labels(html: str, lang: str) -> str:
 
 def generate_tpr_data_lang(g, lang: str, translations_db: Path) -> None:
     """Run after tpr_exporter.generate_tpr_data: replaces the headword
-    definitions in g.tpr_data_list with Sinhala / Thai ones. Root entries
+    definitions in g.tpr_data_list with translated ones. Root entries
     (id 0) are left as built."""
     from exporter.goldendict.helpers import TODAY
     from exporter.jinja2_env import get_jinja2_env

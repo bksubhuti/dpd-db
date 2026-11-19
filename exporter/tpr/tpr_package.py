@@ -384,8 +384,8 @@ def main() -> None:
     )
     parser.add_argument(
         "--lang",
-        choices=["si", "th"],
-        help="build the Sinhala or Thai package from AI-translated definitions",
+        choices=["si", "th", "hi", "my"],
+        help="build the Sinhala, Thai, Hindi or Myanmar package from AI-translated definitions",
     )
     parser.add_argument(
         "--translations",
